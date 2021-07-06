@@ -1,5 +1,5 @@
 /* Unit testing for outcomes
-(C) 2013-2019 Niall Douglas <http://www.nedproductions.biz/> (4 commits)
+(C) 2013-2020 Niall Douglas <http://www.nedproductions.biz/> (4 commits)
 
 
 Boost Software License - Version 1.0 - August 17th, 2003
@@ -50,8 +50,7 @@ BOOST_OUTCOME_AUTO_TEST_CASE(works_outcome_default_construction, "Tests that out
   outcome<udt> a(success());
   BOOST_CHECK(*a.value() == 78);
 
-  // Other path is via explicit conversion from void
-  outcome<void> c = success();
-  outcome<udt> d(c);
+  // Other path is via empty initialiser list
+  outcome<udt> d({});
   BOOST_CHECK(*d.value() == 78);
 }

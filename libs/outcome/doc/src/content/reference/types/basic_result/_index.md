@@ -45,6 +45,7 @@ The second major design difference is that union storage is NOT used, as it is a
 
 - `value_type` is `T`.
 - `error_type` is `E`.
+- `no_value_policy_type` is `NoValuePolicy`.
 - `value_type_if_enabled` is `T` if construction from `T` is available, else it is a usefully named unusable internal type.
 - `error_type_if_enabled` is `E` if construction from `E` is available, else it is a usefully named unusable internal type.
 - `rebind<A, B = E, C = NoValuePolicy>` is `basic_result<A, B, C>`.
@@ -89,7 +90,7 @@ The second major design difference is that union storage is NOT used, as it is a
 - `predicate::enable_make_error_code_compatible_conversion<A, B, C>` is constexpr boolean true if:
     1. `predicate::constructors_enabled` is true.
     2. `basic_result<A, B, C>` is not this `basic_result` type.
-    3. Trait {{% api "is_error_code_available<E>" %}} is true for decayed `error_type`.
+    3. Trait {{% api "is_error_code_available<T>" %}} is true for decayed `error_type`.
     4. `predicate::enable_compatible_conversion<A, B, C>` is not true.
     5. `A` is `void` OR `value_type` is explicitly constructible from `A`.
     6. `error_type` is explicitly constructible from `make_error_code(B)`.
@@ -97,7 +98,7 @@ The second major design difference is that union storage is NOT used, as it is a
 - `predicate::enable_make_exception_ptr_compatible_conversion<A, B, C>` is constexpr boolean true if:
     1. `predicate::constructors_enabled` is true.
     2. `basic_result<A, B, C>` is not this `basic_result` type.
-    3. Trait {{% api "is_exception_ptr_available<E>" %}} is true for decayed `error_type`.
+    3. Trait {{% api "is_exception_ptr_available<T>" %}} is true for decayed `error_type`.
     4. `predicate::enable_compatible_conversion<A, B, C>` is not true.
     5. `A` is `void` OR `value_type` is explicitly constructible from `A`.
     6. `error_type` is explicitly constructible from `make_exception_ptr(B)`.

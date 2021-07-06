@@ -1,5 +1,5 @@
 /* Unit testing for outcomes
-(C) 2013-2019 Niall Douglas <http://www.nedproductions.biz/> (6 commits)
+(C) 2013-2020 Niall Douglas <http://www.nedproductions.biz/> (6 commits)
 
 
 Boost Software License - Version 1.0 - August 17th, 2003
@@ -27,11 +27,12 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 */
 
-#if defined(__cpp_coroutines)
-
 #include <boost/outcome/coroutine_support.hpp>
 #include <boost/outcome/outcome.hpp>
 #include <boost/outcome/try.hpp>
+
+#if BOOST_OUTCOME_FOUND_COROUTINE_HEADER
+
 #include <boost/test/unit_test.hpp>
 #include <boost/test/unit_test_monitor.hpp>
 
