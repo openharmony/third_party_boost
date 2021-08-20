@@ -4,6 +4,132 @@ weight = 80
 +++
 
 ---
+## v2.1.4 ??? (Boost 1.74) [[release]](https://github.com/ned14/outcome/releases/tag/v2.1.4)
+
+{{% notice note %}}
+The v2.1 branch is expected to be retired end of 2020, with the v2.2 branch
+becoming the default. You can use the future v2.2 branch now using
+[`better_optimisation`](https://github.com/ned14/outcome/tree/better_optimisation).
+This branch has a number of major breaking changes to Outcome v2.1, see the front page
+for details.
+{{% /notice %}}
+
+### Enhancements:
+
+BREAKING CHANGE `void` results and outcomes no longer default construct types during explicit construction
+: Previously if you explicitly constructed a `result<T>` from a non-errored
+`result<void>`, it default constructed `T`. This was found to cause unhelpful
+surprise, so it has been disabled.
+
+New macro `BOOST_OUTCOME_ENABLE_LEGACY_SUPPORT_FOR`
+: The macro {{% api "BOOST_OUTCOME_ENABLE_LEGACY_SUPPORT_FOR" %}} can be used to
+enable aliasing of older naming and features to newer naming and features when
+using a newer version of Outcome.
+
+Concepts now have snake case style naming instead of camel case style
+: When Outcome was first implemented, it was thought that C++ 20 concepts were
+going to have camel case style. This was changed before the C++ 20 release, and
+Outcome's concepts have been renamed similarly. This won't break any code in
+Outcome v2.1, as compatibility aliases are provided. However code compiled
+against Outcome v2.2 will need to be upgraded, unless `BOOST_OUTCOME_ENABLE_LEGACY_SUPPORT_FOR`
+is set to `210` or lower.
+
+Concepts now live in `BOOST_OUTCOME_V2_NAMESPACE::concepts` namespace
+: Previously concepts lived in the `convert` namespace, now they live in their
+own namespace.
+
+New concepts {{% api "basic_result<T>" %}} and {{% api "basic_outcome<T>" %}} added
+: End users were finding an unhelpful gap in between {{% api "is_basic_result<T>" %}}
+and {{% api "value_or_error<T>" %}} where they wanted a concept that matched
+types which were `basic_result`, but not exactly one of those. Concepts filling
+that gap were added.
+
+Operation `TRY` works differently from Outcome v2.2 onwards
+: This is a severely code breaking change which change the syntax of how one uses
+`BOOST_OUTCOME_TRY()`. A regular expression suitable for upgrading code can be found in
+the list of changes between Outcome v2.1 and v2.2.
+
+### Bug fixes:
+
+[#224](https://github.com/ned14/outcome/issues/224)
+: The clang Apple ships in Xcode 11.4 (currently the latest) has not been patched
+with the fixes to LLVM clang that fix `noexcept(std::is_constructible<T, void>)`
+failing to compile which I originally submitted years ago. So give up waiting on
+Apple to fix their clang, add a workaround to Outcome.
+
+Spare storage could not be used from within no-value policy classes
+: Due to an obvious brain fart when writing the code at the time, the spare storage
+APIs had the wrong prototype which prevented them working from within policy classes.
+Sorry.
+
+Boost.Outcome should now compile with `BOOST_NO_EXCEPTIONS` defined
+: Thanks to Emil, maintainer of Boost.Exception, making a change for me, Boost.Outcome
+should now compile with C++ exceptions globally disabled. You won't be able to use
+`boost::exception_ptr` as it can't be included if C++ exceptions are globally disabled.
+
+---
+## v2.1.3 29th April 2020 (Boost 1.73) [[release]](https://github.com/ned14/outcome/releases/tag/v2.1.3)
+
+### Enhancements:
+
+Performance of Outcome-based code compiled by clang has been greatly improved
+: The previous implementation of Outcome's status bitfield confused clang's
+optimiser, which caused low quality codegen. Unlike most codegen issues, this was
+noticeably in empirical benchmarks of real world code, as was shown by
+[P1886 *Error speed benchmarking*](https://wg21.link/P1886).
+
+    The safe part of the [`better_optimisation`](https://github.com/ned14/outcome/tree/better_optimisation)
+Outcome v2.2.0 future branch was merged to Outcome v2.1.3 which includes a new
+status bitfield implementation. This appears to not confuse clang's optimiser,
+and clang 9 produces code which routinely beats GCC 9's code for various canned
+use cases.
+
+Precompiled headers are automatically enabled on new enough cmake's for standalone Outcome
+: If on cmake 3.16 or later, its new precompiled headers build support is used
+to tell consumers of the `outcome::hl` cmake target to precompile Outcome, **if
+and only if** `PROJECT_IS_DEPENDENCY` is false. `PROJECT_IS_DEPENDENCY` is set
+by Outcome's CMakeLists.txt if it detects that it was included using
+`add_subdirectory()`, so for the vast majority of Outcome end users, the use
+of precompiled headers will NOT be enabled.
+
+    Exported targets do NOT request precompilation of headers, as it is
+assumed that importers of the Outcome cmake targets will configure their own
+precompiled headers which incorporate Outcome.
+
+Installability is now CI tested per commit
+: Due to installability of standalone Outcome (e.g. `make install`) breaking
+itself rather more frequently than is ideal, installability is now tested on CI
+per commit.
+
+Coroutines support has been documented
+: The coroutines support added in v2.1.2 has now been properly documented.
+
+### Bug fixes:
+
+[#214](https://github.com/ned14/outcome/issues/214)
+: Newer Concepts implementing compilers were unhappy with the early check for
+destructibility of `T` and `E`, so removed template constraints, falling back
+to static assert which runs later in the type instantiation sequence.
+
+[#215](https://github.com/ned14/outcome/issues/215)
+: For standalone Outcome, `CMAKE_TOOLCHAIN_FILE` is now passed through during
+dependency superbuild. This should solve build issues for some embedded toolchain
+users.
+
+[#220](https://github.com/ned14/outcome/issues/220)
+: A false positive undefined behaviour sanitiser failure in some use cases of
+Experimental Outcome was worked around to avoid the failure message.
+
+[#221](https://github.com/ned14/outcome/issues/221)
+: Restored compatibility with x86 on Windows, which was failing with link errors.
+It was quite surprising that this bug was not reported sooner, but obviously
+almost nobody is using Outcome with x86 on Windows.
+
+[#223](https://github.com/ned14/outcome/issues/223)
+: Fix a segfault in Debug builds only when cloning a `status_code_ptr` in
+Experimental.Outcome only.
+
+---
 ## v2.1.2 11th December 2019 (Boost 1.72) [[release]](https://github.com/ned14/outcome/releases/tag/v2.1.2)
 
 ### Enhancements:

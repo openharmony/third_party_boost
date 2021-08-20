@@ -14,6 +14,7 @@
 #include <boost/geometry/core/coordinate_type.hpp>
 #include <boost/geometry/arithmetic/infinite_line_functions.hpp>
 #include <boost/geometry/algorithms/detail/make/make.hpp>
+#include <boost/geometry/algorithms/not_implemented.hpp>
 #include <boost/geometry/util/select_coordinate_type.hpp>
 
 #include <cmath>
@@ -144,10 +145,11 @@ namespace detail
 // a negative means that p is to the right of p1-p2. And a positive value
 // means that p is to the left of p1-p2.
 
-template <typename cs_tag, typename SegmentPoint, typename Point>
+template <typename SegmentPoint, typename Point>
 static distance_measure<typename select_coordinate_type<SegmentPoint, Point>::type>
 get_distance_measure(SegmentPoint const& p1, SegmentPoint const& p2, Point const& p)
 {
+    typedef typename geometry::cs_tag<Point>::type cs_tag;
     return detail_dispatch::get_distance_measure
             <
                 typename select_coordinate_type<SegmentPoint, Point>::type,
