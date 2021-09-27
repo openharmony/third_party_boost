@@ -88,6 +88,7 @@ Note:If the text contains special characters, please escape them according to th
 			<filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
 				<filteritem type="filename" name="README.OpenSource"/>
 				<filteritem type="filename" name="README"/>
+                <filteritem type="filename" name=".+(.tif|.bmp|.jpg|.jpeg|.png|.PNG|.gif|.jam|.pdf|.zip|.cs|.rst|.raw|.dia|.suo|.spirv64|.spirv32|.doc|.vpp|.v2|.mo|.o|.r|.mcp|.qbk|.dsp|.ref|.bz2|.pk|.gz|.quickbook|.chm|.TFF|.TTF|.xls|.xlsx|.pptx|.ico|.doctree|.pickle|.inv|.odp|.pnm|.tga|.CRW|.dat)" desc="开源三方库中以上后缀二进制不涉及License"/>
 			</filefilter>
 		</filefilterlist>
                 <licensematcherlist>
