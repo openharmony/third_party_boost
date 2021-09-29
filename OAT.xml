@@ -82,15 +82,39 @@ Note:If the text contains special characters, please escape them according to th
                 <policyitem type="compatibility" name="zlib-acknowledgement" path="tools/.*" desc="boost软件包，实际使用只用了里面部分头文件，协议友好，满足开源义务履行"/>
                 <policyitem type="compatibility" name="Spencer-86" path="tools/build/src/engine/regexp.cpp" desc="Spencer License 86，原样使用，满足其许可要求"/>
                 <policyitem type="compatibility" name="bzip2 and libbzip2 License" path=".*" desc="该许可证兼容"/>
+                <policyitem type="compatibility" name="GPLStyleLicense" path=".*" desc="该许可证兼容"/>
+                <policyitem type="compatibility" name="BSL-1.0" path="LICENSE_1_0.txt" desc="boost软件包，实际使用只用了里面部分头文件，协议友好，满足开源义务履行"/>
+                <policyitem type="compatibility" name="BSL-1.0" path="libs/thread/build/Jamfile.v2" desc="boost软件包，实际使用只用了里面部分头文件，协议友好，满足开源义务履行"/>
+                <policyitem type="compatibility" name="LGPLStyleLicense" path="libs/thread/build/Jamfile.v2" desc="boost软件包，实际使用只用了里面部分头文件，协议友好，满足开源义务履行"/>
+                <policyitem type="compatibility" name="BSL-1.0" path="libs/sort/benchmark/.*" desc="boost软件包，实际使用只用了里面部分头文件，协议友好，满足开源义务履行"/>
+                <policyitem type="compatibility" name="GPLStyleLicense" path="libs/sort/benchmark/.*" desc="boost软件包，实际使用只用了里面部分头文件，协议友好，满足开源义务履行"/>
+                <policyitem type="compatibility" name="GPLStyleLicense" path="libs/nowide/doc/html/jquery.js" desc="对应boost软件包中doc目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="MIT" path="libs/nowide/doc/html/jquery.js" desc="对应boost软件包中doc目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="GPLStyleLicense" path="libs/locale/doc/html/jquery.js" desc="对应boost软件包中doc目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="MIT" path="libs/hana/doc/html/jquery.js" desc="对应boost软件包中doc目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="GPLStyleLicense" path="libs/hana/doc/html/jquery.js" desc="对应boost软件包中doc目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="MIT" path="libs/sort/doc/doxygen/html/jquery.js" desc="对应boost软件包中doc目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="GPLStyleLicense" path="libs/sort/doc/doxygen/html/jquery.js" desc="对应boost软件包中doc目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="MIT" path="libs/gil/doc/html/reference/jquery.js" desc="对应boost软件包中doc目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="GPLStyleLicense" path="libs/gil/doc/html/reference/jquery.js" desc="对应boost软件包中doc目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="GPLStyleLicense" path="libs/numeric/ublas/doc/js/jquery-1.3.2.min.js" desc="对应boost软件包中doc目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="BSL-1.0" path="libs/iterator/doc/GNUmakefile" desc="对应boost软件包中doc目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="GPLStyleLicense" path="libs/iterator/doc/GNUmakefile" desc="对应boost软件包中doc目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="GPLStyleLicense" path="libs/beast/test/extern/zlib-1.2.11/contrib/ada/zlib.ads" desc="对应boost软件包中test目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="GPLStyleLicense" path="tools/boost_install/test/iostreams/zlib-1.2.11/contrib/ada/zlib.ads" desc="对应boost软件包中test目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="GPL-3.0+" path="tools/build/src/engine/jamgram.hpp" desc="对应boost软件包中tools/build目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="GPL-3.0+" path="tools/build/src/engine/jamgram.cpp" desc="对应boost软件包中tools/build目录下文件，明确不使用"/>
+                <policyitem type="compatibility" name="bzip2-1.0.6" path="tools/boost_install/test/iostreams/bzip2-1.0.6/LICENSE" desc="License本身且该许可证兼容"/>
+                <policyitem type="compatibility" name="GPLStyleLicense" path="doc/latex.version" desc="三方开源版本文档，明确不使用"/>
             </policy>
         </policylist>
 		<filefilterlist>
 			<filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
 				<filteritem type="filename" name="README.OpenSource"/>
 				<filteritem type="filename" name="README"/>
-            </filefilter>
-            <filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary header policies">
-                <filteritem type="filename" name=".+(.tif|.bmp|.jpg|.jpeg|.png|.PNG|.gif|.jam|.pdf|.zip|.cs|.rst|.raw|.dia|.suo|.spirv64|.spirv32|.doc|.vpp|.v2|.mo|.o|.r|.mcp|.qbk|.dsp|.ref|.bz2|.pk|.gz|.quickbook|.chm|.TFF|.TTF|.xls|.xlsx|.pptx|.ico|.doctree|.pickle|.inv|.odp|.pnm|.tga|.CRW|.dat)" desc="开源三方库中以上后缀二进制不涉及License"/>
+			</filefilter>
+			<filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies">
+				<filteritem type="filepath" name=".*.tif|.*.bmp|.*.jpg|.*.jpeg|.*.png|.*.PNG|.*.gif|.*.jam|.*.pdf|.*.zip|.*.cs|.*.rst|.*.raw|.*.dia|.*.suo|.*.spirv64|.*.spirv32|.*.doc|.*.vpp|.*.v2|.*.mo|.*.o|.*.r|.*.mcp|.*.qbk|.*.dsp|.*.ref|.*.bz2|.*.pk|.*.gz|.*.quickbook|.*.chm|.*.TFF|.*.TTF|.*.xls|.*.xlsx|.*.pptx|.*.ico|.*.doctree|.*.pickle|.*.inv|.*.odp|.*.pnm|.*.tga|.*.CRW|.*.dat|.*.pem|.*.db" desc="开源三方库中以上后缀二进制不涉及License"/>
 			</filefilter>
 		</filefilterlist>
                 <licensematcherlist>
