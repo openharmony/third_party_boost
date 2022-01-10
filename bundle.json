@@ -1,0 +1,39 @@
+{
+    "name": "@ohos/boost",
+    "version": "",
+    "description": "Third-party open-source software boost | 三方开源软件boost",
+    "homePage": "https://gitee.com/openharmony",
+    "license": "Boost Software License V1.0",
+    "repository": "https://gitee.com/openharmony/third_party_boost",
+    "domain": "os",
+    "language": "",
+    "publishAs": "code-segment",
+    "private": false,
+    "scripts": {},
+    "tags": [
+        "third_party"
+    ],
+    "keywords": [
+        "third-party",
+        "boost"
+    ],
+    "envs": [],
+    "dirs": [],
+    "segment": {
+        "destPath": "third_party/boost"
+    },
+    "component": {
+        "name": "thirdparty_boost",
+        "subsystem": "",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": [],
+        "rom": "",
+        "ram": "",
+        "build": {
+            "sub_component": [],
+            "inner_kits": [],
+            "test": []
+        }
+    }
+}
